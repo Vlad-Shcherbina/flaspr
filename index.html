@@ -1,5 +1,7 @@
 <html ng-app="flaspr">
   <head>
+    <meta name="google" value="notranslate"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-route.min.js"></script>
     <script src='https://cdn.firebase.com/v0/firebase.js'></script>
@@ -14,10 +16,11 @@
     </span>
     <span ng-hide="auth"><a ng-click="login()" href="">Login</a></span>
     <hr>
-    OMG this page is in english. <br>
     Links:
     <a href="#dicts">dicts</a> |
     <a href="#ask">ask</a>
+    <hr>
+    Languages: {{data.langs | json}}
     <hr>
     <div ng-view ng-show="data"></div>
   </body>
@@ -54,7 +57,6 @@
 <span ng-show="q.but">
 (but not <span ng-repeat="b in q.but">{{b}}</span>)
 </span>
-
 <br>
 <br>
 
