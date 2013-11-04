@@ -1,0 +1,86 @@
+<html ng-app="flaspr">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-route.min.js"></script>
+    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+    <script src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+    <script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+    <script src='script.js'></script>
+  </head>
+
+  <body ng-controller="RootController">
+    <span ng-show="auth">
+      {{auth.username}} | <a ng-click="logout()" href="">Logout</a>
+    </span>
+    <span ng-hide="auth"><a ng-click="login()" href="">Login</a></span>
+    <hr>
+    OMG this page is in english. <br>
+    Links:
+    <a href="#dicts">dicts</a> |
+    <a href="#ask">ask</a>
+    <hr>
+    <div ng-view ng-show="data"></div>
+  </body>
+</html>
+
+<script type="text/ng-template" id="dicts.html">
+  {{q_to_add | json}}, {{a_to_add | json}}
+  <br/>
+  <form name="form" novalidate>
+    <input type="text" ng-model="q_to_add" placeholder="en" required></input>
+    <input type="text" ng-model="a_to_add" placeholder="de" required></input>
+    <button ng-click="add(q_to_add, a_to_add)" ng-disabled="form.$invalid">add</button>
+  </form>
+  {{data.dicts}}
+  <div ng-repeat="(dict_name, dict) in data.dicts">
+    <h3>{{dict_name}}</h3>
+    <ul>
+      <li ng-repeat="(question, answers) in dict.words">
+        {{question}}
+        <ul>
+          <li ng-repeat="(answer, details) in answers">
+            {{answer}}
+            <button ng-click="delete(dict_name, question, answer)">delete</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</script>
+
+<script type="text/ng-template" id="ask.html">
+<h3>{{q.question}}?</h3>
+<span ng-show="q.but">
+(but not <span ng-repeat="b in q.but">{{b}}</span>)
+</span>
+
+<br>
+<br>
+
+<i ng-hide="scoring">
+Expected:
+<ul>
+  <li ng-repeat="e in q.expect">{{e}}</li>
+</ul>
+<form><button ng-click="scoring=true">ok</button></form>
+</i>
+
+<form ng-show="scoring">
+<ul>
+  <li ng-repeat="e in q.expect">{{e}}
+    <span ng-repeat="i in [0, 1, 2]">
+      <input
+        type="radio"
+        ng-model="scores[e]"
+        value="{{i}}"> {{i}}
+    </span>
+  </li>
+</ul>
+
+<pre>
+{{scores | json}}
+</pre>
+</form>
+
+</script>
