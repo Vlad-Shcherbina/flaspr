@@ -36,10 +36,6 @@ function setDefaultData($data) {
           "hello": makeWordInfo()}
     }}
   };
-  $data.langs = {
-    "en": {hz:0},
-    "de": {hz:0}
-  }
 }
 
 function RootController($scope, angularFire, angularFireAuth) {
@@ -64,9 +60,6 @@ function RootController($scope, angularFire, angularFireAuth) {
 
     var ref = new Firebase("https://flaspr.firebaseio.com/users/" + user.username + "/dicts");
     angularFire(ref, $scope.data, "dicts");
-
-    ref = new Firebase("https://flaspr.firebaseio.com/users/" + user.username + "/langs");
-    angularFire(ref, $scope.data, "langs");
   });
   $scope.$on("angularFireAuth:logout", function(evt) {
     console.log('on logout');
