@@ -1,0 +1,22 @@
+{{q_to_add | json}}, {{a_to_add | json}}
+<br/>
+<form name="form" novalidate>
+  <input type="text" ng-model="q_to_add" placeholder="en" required></input>
+  <input type="text" ng-model="a_to_add" placeholder="de" required></input>
+  <button ng-click="add(q_to_add, a_to_add)" ng-disabled="form.$invalid">add</button>
+</form>
+{{data.dicts}}
+<div ng-repeat="(dict_name, dict) in data.dicts">
+  <h3>{{dict_name}}</h3>
+  <ul>
+    <li ng-repeat="(question, answers) in dict.words">
+      {{question}}
+      <ul>
+        <li ng-repeat="(answer, details) in answers">
+          {{answer}}
+          <button ng-click="delete(dict_name, question, answer)">delete</button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
