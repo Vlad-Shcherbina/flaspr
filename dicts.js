@@ -1,7 +1,11 @@
 function DictsController($scope) {
   $scope.language_pair = 'en-de';
-  $scope.left_lang = 'en';
-  $scope.right_lang = 'de';
+  $scope.$watch('language_pair', function() {
+    langs = $scope.language_pair.split('-');
+    assert(langs.length == 2);
+    $scope.left_lang = langs[0];
+    $scope.right_lang = langs[1];
+  });
 
   $scope.q_to_add = "";
   $scope.a_to_add = "";
