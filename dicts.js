@@ -1,10 +1,19 @@
-function DictsController($scope) {
-  $scope.language_pair = 'en-de';
-  $scope.$watch('language_pair', function() {
-    langs = $scope.language_pair.split('-');
+function joinLangPair(left_lang, right_lang) {
+  return left_lang + '-' + right_lang;
+}
+
+function splitLangPair(lang_pair) {
+    langs = lang_pair.split('-');
     assert(langs.length == 2);
-    $scope.left_lang = langs[0];
-    $scope.right_lang = langs[1];
+    return {left: langs[0], right: langs[1]};
+}
+
+function DictsController($scope) {
+  $scope.lang_pair = 'en-de';
+  $scope.$watch('lang_pair', function() {
+    var langs = splitLangPair($scope.lang_pair);
+    $scope.left_lang = langs.left;
+    $scope.right_lang = langs.right;
   });
 
   $scope.q_to_add = "";

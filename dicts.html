@@ -1,7 +1,7 @@
 <form name="form" novalidate>
-  <pre>{{language_pair}}</pre>
+  <pre>{{lang_pair}}</pre>
   <br>
-  <select ng-model="language_pair"
+  <select ng-model="lang_pair"
           required
           ng-options="dict_name as dict_name for (dict_name, _) in data.dicts">
   </select>

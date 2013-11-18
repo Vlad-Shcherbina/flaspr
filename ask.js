@@ -5,6 +5,7 @@ function getQuestion(dicts) {
     var dict = dicts[dict_name];
     for (var word in dict.words) {
       if (Math.random() * (n + 1) < 1.0) {
+        result.lang_pair = dict_name;
         result.question = word;
         do {
           result.expect = [];
