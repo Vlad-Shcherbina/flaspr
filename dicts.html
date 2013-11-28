@@ -8,7 +8,16 @@
   <br>
   <input type="text" ng-model="left_lang" placeholder="language" required></input>
   <input type="text" ng-model="right_lang" placeholder="language" required></input>
-  <button ng-click="addDict(left_lang, right_lang)" ng-disabled="!canAddDict(left_lang, right_lang)">Add {{left_lang}}->{{right_lang}} dict</button>
+  <button
+    ng-click="addDict(left_lang, right_lang)"
+    ng-disabled="!canAddDict(left_lang, right_lang)">
+    Create {{left_lang}}->{{right_lang}} dict
+  </button>
+  <button
+    ng-click="addDict(right_lang, left_lang)"
+    ng-disabled="!canAddDict(right_lang, left_lang)">
+    Create {{right_lang}}->{{left_lang}} dict
+  </button>
 </form>
 <hr>
 {{left_word | json}}, {{right_word | json}}
