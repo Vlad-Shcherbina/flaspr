@@ -5,3 +5,12 @@ function assert(condition, message) {
     else
       throw "Assertion failed";
 }
+
+
+// analog of python dict.setdefault
+function setDefault(obj, key, default_value) {
+  if (!(key in obj))
+    obj[key] = default_value;
+  console.log('set default', obj[key])
+  return obj[key];
+}

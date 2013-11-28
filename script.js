@@ -26,11 +26,13 @@ function makeWordInfo() {
 function setDefaultData($data) {
   $data.dicts = {
     "en-de": {
+      placeholder: 0,
       words: {
         "hello": {
           "hallo": makeWordInfo()}
     }},
     "de-en": {
+      placeholder: 0,
       words: {
         "hallo": {
           "hello": makeWordInfo()}

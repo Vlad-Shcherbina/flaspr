@@ -8,7 +8,7 @@
   <br>
   <input type="text" ng-model="left_lang" placeholder="language" required></input>
   <input type="text" ng-model="right_lang" placeholder="language" required></input>
-  <!-- <button ng-click="add(q_to_add, a_to_add)" ng-disabled="form.$invalid">add dictionary</button> -->
+  <button ng-click="addDict(left_lang, right_lang)" ng-disabled="!canAddDict(left_lang, right_lang)">Add {{left_lang}}->{{right_lang}} dict</button>
 </form>
 <hr>
 {{q_to_add | json}}, {{a_to_add | json}}
