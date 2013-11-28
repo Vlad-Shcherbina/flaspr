@@ -11,6 +11,5 @@ function assert(condition, message) {
 function setDefault(obj, key, default_value) {
   if (!(key in obj))
     obj[key] = default_value;
-  console.log('set default', obj[key])
   return obj[key];
 }

@@ -30,32 +30,24 @@ function DictsController($scope) {
   }
 
   $scope.canAddWord = function(left_lang, right_lang, left_word, right_word) {
-
+    var lang_pair = joinLangPair(left_lang, right_lang);
+    var dict = $scope.data.dicts[lang_pair];
+    if (dict === undefined)
+      return false;
+    var words = setDefault(dict, 'words', {});
+    return !(left_word in words && right_word in words[left_word]);
   }
+
   $scope.addWord = function(left_lang, right_lang, left_word, right_word) {
     assert($scope.canAddWord(left_lang, right_lang, left_word, right_word));
+    var lang_pair = joinLangPair(left_lang, right_lang);
+    var words = setDefault($scope.data.dicts[lang_pair], 'words', {});
+    var word = setDefault(words, left_word, {});
+    word[right_word] = makeWordInfo();
   }
 
-  $scope.q_to_add = "";
-  $scope.a_to_add = "";
-
-  $scope.add = function(q, a) {
-    console.log("q and a: ", q, a);
-
-    var words = setDefault($scope.data.dicts[$scope.lang_pair], 'words', {})
-    if (!(q in words)) words[q] = {};
-    words[q][a] = makeWordInfo();
-
-    words = setDefault(
-      $scope.data.dicts[joinLangPair($scope.right_lang, $scope.left_lang)],
-      'words',
-      {})
-    if (!(a in words)) words[a] = {};
-    words[a][q] = makeWordInfo();
-
-    $scope.q_to_add = "";
-    $scope.a_to_add = "";
-  }
+  $scope.left_word = "";
+  $scope.right_word = "";
 
   $scope.delete = function(dict_name, q, a) {
     var words = $scope.data.dicts[dict_name].words;
