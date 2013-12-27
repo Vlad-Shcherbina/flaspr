@@ -23,7 +23,7 @@ function makeWordInfo() {
   return {p: 0};
 }
 
-function setDefaultData($data) {
+function initializeDefaultData($data) {
   $data.dicts = {
     "en-de": {
       placeholder: 0,
@@ -58,7 +58,7 @@ function RootController($scope, angularFire, angularFireAuth) {
     console.log('on login');
     $scope.data = $scope.$new(/*isolate=*/true);
 
-    setDefaultData($scope.data);
+    initializeDefaultData($scope.data);
 
     var ref = new Firebase("https://flaspr.firebaseio.com/users/" + user.username + "/dicts");
     angularFire(ref, $scope.data, "dicts");

@@ -9,7 +9,9 @@ function assert(condition, message) {
 
 // analog of python dict.setdefault
 function setDefault(obj, key, default_value) {
-  if (!(key in obj))
+  if (!(key in obj)) {
+    console.log('setDefault', key, default_value);
     obj[key] = default_value;
+  }
   return obj[key];
 }
