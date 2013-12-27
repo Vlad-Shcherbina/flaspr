@@ -20,7 +20,10 @@ Expected:
       <input
         type="radio"
         ng-model="scores[e]"
-        value="{{i}}"> {{i}}
+        value="{{i}}"
+        id="score{{$parent.$index}}_{{i}}"
+        class="score{{i}}">
+      <label for="score{{$parent.$index}}_{{i}}">{{i}}</label>
     </span>
   </li>
 </ul>
